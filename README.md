@@ -1,22 +1,24 @@
 ## Voting App freeCodeCamp's challenge
 
+ Build a Voting application (freeCodeCamp's Challenge)
+
 
 # Table of Contents
-  * [API](#API)
-  * [Generics](#Generics)
-  * [Polls (get list of polls)](#Polls)
-  * [Poll (get single poll)](#Poll)
-  * [Authorization](#Authorization)
+  * [API](#api)
+  * [Generics](#generics)
+  * [Polls (get list of polls)](#polls)
+  * [Poll (get single poll)](#poll)
+  * [Authorization](#authorization)
 
 
-# API
+# API <a name="api"></a>
 
-### Generics
+### Generics <a name="generics"></a>
 
 Meta contains user session information
 
 
-### Polls
+### Polls <a name="polls"></a>
 
 List of all available Polls
 
@@ -33,7 +35,7 @@ Response:
 
 ```
 
-### Poll
+### Poll <a name="poll"></a>
 
 Get one poll
 
@@ -51,7 +53,7 @@ Response:
 
 
 
-### Authorization
+### Authorization <a name="authorization"></a>
 
 GitHub user authorization.
 
