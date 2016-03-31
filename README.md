@@ -11,6 +11,7 @@
   * [Updating polls](#poll-update)
   * [Polls (get list of polls)](#polls)
   * [Poll (get single poll)](#poll)
+  * [Delete poll](#delete)
   * [Vote api](#vote)
   * [Authorization](#authorization)
 
@@ -80,6 +81,19 @@ Response:
   data : {poll-data}
   meta : {some-meta-info}
 }
+```
+
+### Delete Poll <a name="delete"></a>
+
+
+```
+Request:
+
+DELETE /api/poll/:id
+
+Response:
+200 ok
+{}
 ```
 
 ### Vote <a name="vote"></a>
