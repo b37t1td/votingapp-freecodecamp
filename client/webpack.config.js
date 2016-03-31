@@ -11,7 +11,7 @@ module.exports = {
     entry: {
       app : path.resolve(dir_js, 'index.js')
     },
-    devtool: 'source-map',
+    //devtool: 'source-map',
     output: {
         path: dir_build,
         filename: 'bundle.js'
@@ -32,8 +32,8 @@ module.exports = {
             },
             {
               test: /\.less$/,
-              loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
-              //loader: ExtractTextPlugin.extract("style-loader", "css-loader?minimize!less-loader")
+              //loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
+              loader: ExtractTextPlugin.extract("style-loader", "css-loader?minimize!less-loader")
             },
             {
               //  exclude: /node_modules/,
@@ -43,13 +43,15 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
         new webpack.ProvidePlugin({
           'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
         }),
         new ExtractTextPlugin("[name].css"),
-        //new webpack.optimize.UglifyJsPlugin({minimize: true}),
+        new webpack.optimize.UglifyJsPlugin({minimize: true}),
         // Avoid publishing files when compilation fails
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoErrorsPlugin()
+
     ],
     stats: {
         // Nice colored output
