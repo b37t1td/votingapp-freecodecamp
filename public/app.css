@@ -10254,7 +10254,17 @@ html {
 }
 .dashboard {
   display: flex;
+  flex-direction: column;
   margin: auto;
+}
+.dashboard div.copy {
+  display: flex;
+  justify-content: center;
+  bottom: 0px;
+  height: 20px;
+}
+.dashboard div.copy a {
+  margin: 0px 4px;
 }
 .dashboard > div {
   min-width: 280px;

@@ -47,8 +47,14 @@ class Application extends Component {
             <div className="container">
             {this.props.children}
             </div>
+
+            <div className="copy">
+              by <a href="http://https://www.freecodecamp.com/linuxenko">@linuxenko</a>
+               this project <a href="https://github.com/b37t1td/votingapp-freecodecamp">github</a> repo
+            </div>
           </div>
           {loadingBadge}
+
       </div>
     )
   }
