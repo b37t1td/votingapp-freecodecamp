@@ -2,6 +2,7 @@
 
  Build a Voting application (freeCodeCamp's Challenge)
 
+[Home of the project](https://votingapp-freecodecamp.herokuapp.com/app)
 
 # Table of Contents
   * [API](#api)
