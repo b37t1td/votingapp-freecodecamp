@@ -11,8 +11,30 @@ var request = require('request');
 
 module.exports = function(app, db) {
 
+  function authorizeAndSave(token, req, res) {
+    request.get({
+      url : 'https://api.github.com/user',
+      json: true,
+      headers : {
+        'User-Agent': 'Voting App freeCodeCamps challenge',
+        'Authorization': 'token ' + token
+      }
+    }, function(err, resp, body) {
+      db.createLogin(body, function(err, data) {
+        if (err) return res.status(500).end();
+        req.session.user = data;
+        res.redirect('/app');
+      });
+    });
+  }
+
   app.get('/api/auth/login', function(req,res) {
       githubOAuth.login(req, res);
+  });
+
+  app.get('/api/auth/logout', function(req,res) {
+    req.session.user = null;
+    res.redirect('/app');
   });
 
   app.get('/api/auth/callback', function(req,res) {
@@ -20,24 +42,14 @@ module.exports = function(app, db) {
   });
 
   githubOAuth.on('error', function(err) {
-    console.error('there was a login error', err)
   });
 
-  githubOAuth.on('token', function(token, res) {
-    console.log('here is your shiny new github oauth token', token)
-
-    request.get({
-      url : 'https://api.github.com/user',
-      json: true,
-      headers : {
-        'User-Agent': 'request',
-        'Authorization': 'token ' +token.access_token
-      }
-    },
-      function(err, resp, body) {
-        console.log(body);
-        res.end(JSON.stringify(token));
-    });
+  githubOAuth.on('token', function(token, res, rt, req) {
+    if (typeof token.access_token !== 'undefined') {
+      authorizeAndSave(token.access_token, req, res);
+    } else {
+      res.status(403).end();
+    }
   });
 
 }

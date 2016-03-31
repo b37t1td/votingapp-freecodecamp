@@ -1,0 +1,81 @@
+@import '~bootstrap/less/bootstrap.less';
+@import '~font-awesome/less/font-awesome.less';
+@import './bootstrap-social.less';
+@import './vote-list.less';
+@import './edit-vote.less';
+@import './vote.less';
+
+body,html, {
+  height: 100%;
+  overflow: hidden;
+}
+
+.application {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+}
+
+.application-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+
+    .header {
+      padding: 10px 0px;
+      .logo {
+        height: 60px;
+        background: transparent url('./logo.svg') 20px 0px no-repeat;
+      }
+    }
+}
+
+.dashboard {
+  display: flex;
+  margin: auto;
+
+
+  &>div {
+    min-width: 280px;
+    max-width: 580px;
+  }
+
+  .vote-list {
+    width: 100%;
+  }
+}
+
+.loading-badge {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 9px;
+  text-transform: uppercase;
+  i {
+    margin-right: 5px;
+  }
+}
+
+.btn-social {
+  text-align: center;
+}
+
+.login-badge {
+  margin-top: 10px;
+
+  a {
+    color: #fff;
+  }
+
+  .logout {
+    margin-left: 10px;
+    color: #eee;
+    &:hover {
+      color: #fff;
+    }
+  }
+}

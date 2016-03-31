@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var path = require('path');
 var db = null;
 
 app.use(session({ secret: 'votingAppCampsSess',
@@ -9,24 +10,41 @@ app.use(session({ secret: 'votingAppCampsSess',
   resave : true,
    cookie: {
      secure: false,
-     maxAge: 909943600
+     maxAge: 22909943600
    }
  }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static('public'));
+
+app.get('/', function(req,res) {
+  res.redirect('/app/');
+});
+
+app.get(/^\/app\/?.*/, function(req, res){
+  res.sendFile(path.resolve(__dirname +'/../public/app.html'));
+});
+
 app.use(function(req, res, next) {
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,HEAD,OPTIONS');
-	res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, X-HTTP-Method-Override');
+	res.setHeader('Content-Type', 'application/json');
 	next();
 });
 
-/* /api/auth */
-require('./auth')(app, db);
+app.get('/', function(req,res) {
+  res.send(JSON.stringify(req.session.user)).end();
+});
+
 
 db = new require('./database')(function() {
+
+  /* /api/auth */
+  require('./auth')(app, db);
+
+  /* /api/poll[s] */
+  require('./polls')(app,db);
+
   app.listen(process.env.PORT, function() {
     console.log('Application started on :' + process.env.PORT);
   });

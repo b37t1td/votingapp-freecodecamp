@@ -6,8 +6,11 @@
 # Table of Contents
   * [API](#api)
   * [Generics](#generics)
+  * [Creating polls](#poll-create)
+  * [Updating polls](#poll-update)
   * [Polls (get list of polls)](#polls)
   * [Poll (get single poll)](#poll)
+  * [Vote api](#vote)
   * [Authorization](#authorization)
 
 
@@ -16,6 +19,33 @@
 ### Generics <a name="generics"></a>
 
 Meta contains user session information
+
+Response codes are 500 internal err,  403 forbidden, 200 ok.
+
+
+### Creating polls <a name="poll-create"></a>
+
+```
+Request:
+POST /api/poll
+@data { title : title , variants : [{ title : title, voted : 0}]}
+
+Response:
+200 Ok
+{}
+```
+
+### Poll update <a name="poll-update"></a>
+
+```
+Request:
+POST /api/poll/:id
+@data { title : title , variants : [{ title : title, voted : 0}]}
+
+Response:
+200 Ok
+{}
+```
 
 
 ### Polls <a name="polls"></a>
@@ -51,7 +81,21 @@ Response:
 }
 ```
 
+### Vote <a name="vote"></a>
 
+Vote for a poll variant
+
+```
+Request:
+
+POST /api/vote
+@param id        (id of the poll)
+@param variant   (variant title)
+
+Reponse:
+200 OK
+{}
+```
 
 ### Authorization <a name="authorization"></a>
 
